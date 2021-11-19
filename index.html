@@ -146,6 +146,115 @@ class="article article-type-post"
   
     
       <article
+id="post-遇到的问题_SpringBoot"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/2021/11/19/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98_SpringBoot/">SpringBoot学习路上遇到的问题</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h1 id="数据库无法连接"><a href="#数据库无法连接" class="headerlink" title="数据库无法连接"></a>数据库无法连接</h1><ol>
+<li><p>配置文件异常 例如：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">    <span class="attr">datasource:</span></span><br><span class="line">		<span class="attr">driver-class-name:</span> <span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line">		<span class="attr">Url:</span> <span class="string">jdbc:mysql://:/WXDinner?</span></span><br><span class="line">		<span class="attr">username:</span> </span><br><span class="line">		<span class="attr">password:</span> </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>但是下方的方式可以使用</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">spring.datasource.driver-class-name=</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line"><span class="string">spring.datasource.url=jdbc:mysql://:/WXDinner?characterEncoding=UTF-8&amp;useUnicode=true&amp;useSSL=false&amp;tinyInt1isBit=false</span></span><br><span class="line"><span class="string">spring.datasource.username=</span></span><br><span class="line"><span class="string">spring.datasource.password=</span></span><br></pre></td></tr></table></figure></li>
+<li><p>没装连接用的jar包</p>
+</li>
+</ol>
+<h1 id="SpringBoot测试"><a href="#SpringBoot测试" class="headerlink" title="SpringBoot测试"></a>SpringBoot测试</h1><p>例子</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith(SpringRunner.class)</span></span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SampleTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserMapper userMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSelect</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println((<span class="string">&quot;----- selectAll method test ------&quot;</span>));</span><br><span class="line">        List&lt;User&gt; userList = userMapper.selectList(<span class="keyword">null</span>);</span><br><span class="line">        Assert.assertEquals(<span class="number">5</span>, userList.size());</span><br><span class="line">        userList.forEach(System.out::println);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Service错误"><a href="#Service错误" class="headerlink" title="Service错误"></a>Service错误</h1><p>未使用注释@Service,若使用serviceimp则应在impl中标注@Service</p>
+<h1 id="org-apache-ibatis-binding-BindingException-Invalid-bound-statement-not-found"><a href="#org-apache-ibatis-binding-BindingException-Invalid-bound-statement-not-found" class="headerlink" title="org.apache.ibatis.binding.BindingException: Invalid bound statement (not found)"></a>org.apache.ibatis.binding.BindingException: Invalid bound statement (not found)</h1><p>mapper.java与mapper.xml文件名应相同</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">mapper-locations未配置正确</span></span><br></pre></td></tr></table></figure>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2021-11-19T01:23:18.000Z" itemprop="datePublished">2021-11-19</time>
+</div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-遇到的问题_博客搭建"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/2021/11/19/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98_%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">Hexo博客搭建路上遇到的问题</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h1 id="网站显示404"><a href="#网站显示404" class="headerlink" title="网站显示404"></a>网站显示404</h1><p>在网站根目录新建CNAME文件，文件中写入域名。</p>
+
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2021-11-19T01:23:18.000Z" itemprop="datePublished">2021-11-19</time>
+</div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
 id="post-遇到的问题以及解决方案_MyBatis"
 class="article article-type-post"
 >
@@ -4680,115 +4789,6 @@ class="article article-type-post"
 
     
   
-    
-      <article
-id="post-遇到的问题_SpringBoot"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/2021/11/19/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98_SpringBoot/">SpringBoot学习路上遇到的问题</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h1 id="数据库无法连接"><a href="#数据库无法连接" class="headerlink" title="数据库无法连接"></a>数据库无法连接</h1><ol>
-<li><p>配置文件异常 例如：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">    <span class="attr">datasource:</span></span><br><span class="line">		<span class="attr">driver-class-name:</span> <span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line">		<span class="attr">Url:</span> <span class="string">jdbc:mysql://:/WXDinner?</span></span><br><span class="line">		<span class="attr">username:</span> </span><br><span class="line">		<span class="attr">password:</span> </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>但是下方的方式可以使用</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">spring.datasource.driver-class-name=</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line"><span class="string">spring.datasource.url=jdbc:mysql://:/WXDinner?characterEncoding=UTF-8&amp;useUnicode=true&amp;useSSL=false&amp;tinyInt1isBit=false</span></span><br><span class="line"><span class="string">spring.datasource.username=</span></span><br><span class="line"><span class="string">spring.datasource.password=</span></span><br></pre></td></tr></table></figure></li>
-<li><p>没装连接用的jar包</p>
-</li>
-</ol>
-<h1 id="SpringBoot测试"><a href="#SpringBoot测试" class="headerlink" title="SpringBoot测试"></a>SpringBoot测试</h1><p>例子</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith(SpringRunner.class)</span></span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SampleTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserMapper userMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSelect</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println((<span class="string">&quot;----- selectAll method test ------&quot;</span>));</span><br><span class="line">        List&lt;User&gt; userList = userMapper.selectList(<span class="keyword">null</span>);</span><br><span class="line">        Assert.assertEquals(<span class="number">5</span>, userList.size());</span><br><span class="line">        userList.forEach(System.out::println);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="Service错误"><a href="#Service错误" class="headerlink" title="Service错误"></a>Service错误</h1><p>未使用注释@Service,若使用serviceimp则应在impl中标注@Service</p>
-<h1 id="org-apache-ibatis-binding-BindingException-Invalid-bound-statement-not-found"><a href="#org-apache-ibatis-binding-BindingException-Invalid-bound-statement-not-found" class="headerlink" title="org.apache.ibatis.binding.BindingException: Invalid bound statement (not found)"></a>org.apache.ibatis.binding.BindingException: Invalid bound statement (not found)</h1><p>mapper.java与mapper.xml文件名应相同</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">mapper-locations未配置正确</span></span><br></pre></td></tr></table></figure>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2021-11-19T01:23:18.000Z" itemprop="datePublished">2021-11-19</time>
-</div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-遇到的问题_博客搭建"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/2021/11/19/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98_%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">Hexo博客搭建路上遇到的问题</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h1 id="网站显示404"><a href="#网站显示404" class="headerlink" title="网站显示404"></a>网站显示404</h1><p>在网站根目录新建CNAME文件，文件中写入域名。</p>
-
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2021-11-19T01:23:18.000Z" itemprop="datePublished">2021-11-19</time>
-</div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
 
   
 </div>
@@ -4829,19 +4829,19 @@ class="article article-type-post"
           </li>
         
           <li>
+            <a href="/2021/11/19/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98_SpringBoot/">SpringBoot学习路上遇到的问题</a>
+          </li>
+        
+          <li>
+            <a href="/2021/11/19/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98_%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">Hexo博客搭建路上遇到的问题</a>
+          </li>
+        
+          <li>
             <a href="/2021/11/19/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E4%BB%A5%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88_MyBatis/">MyBatis学习路上遇到的问题</a>
           </li>
         
           <li>
             <a href="/2021/11/19/Unix%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BE%E5%A0%82%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/">Unix程序设计课堂知识点整理</a>
-          </li>
-        
-          <li>
-            <a href="/2021/11/19/Unix%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%A4%B4%E6%AD%8C%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/">Unix程序设计头歌知识点整理</a>
-          </li>
-        
-          <li>
-            <a href="/2021/11/19/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98_SpringBoot/">SpringBoot学习路上遇到的问题</a>
           </li>
         
       </ul>
